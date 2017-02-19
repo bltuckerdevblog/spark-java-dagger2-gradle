@@ -11,12 +11,19 @@ public class Application {
         //initialize dagger
         initializeDagger();
 
+        //register exception handlers
+        registerExceptionHandlers();
+
         //register routes
         registerRoutes();
     }
 
     private void initializeDagger() {
         applicationComponent = DaggerApplicationComponent.create();
+    }
+
+    private void registerExceptionHandlers() {
+        applicationComponent.exceptionHandlerRegistry().registerHandlers();
     }
 
     private void registerRoutes(){

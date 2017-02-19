@@ -3,6 +3,8 @@ package com.abnormallydriven.daggerspark.people;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
+import com.abnormallydriven.daggerspark.errors.EntityNotFoundException;
+
 import java.util.List;
 
 import javax.inject.Inject;
@@ -28,7 +30,7 @@ public class PeopleResource {
         return peopleRepository.createPerson(requestDto.get("firstName").getAsString(), requestDto.get("lastName").getAsString());
     }
 
-    public Person getPerson(Request request, Response response){
+    public Person getPerson(Request request, Response response) throws EntityNotFoundException {
         Long personId = Long.valueOf(request.params(":id"));
         return peopleRepository.getPersonById(personId);
     }
@@ -37,7 +39,7 @@ public class PeopleResource {
         return peopleRepository.getAllPeople();
     }
 
-    public Person updatePerson(Request request, Response response){
+    public Person updatePerson(Request request, Response response) throws EntityNotFoundException {
         Long personId = Long.valueOf(request.params(":id"));
 
         JsonObject requestDto = gson.fromJson(request.body(), JsonObject.class);

@@ -1,5 +1,7 @@
 package com.abnormallydriven.daggerspark.people;
 
+import com.abnormallydriven.daggerspark.errors.EntityNotFoundException;
+
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -35,8 +37,12 @@ public class PeopleRepository {
                 .collect(Collectors.toList());
     }
 
-    public Person getPersonById(long personId){
-        return personMap.get(personId);
+    public Person getPersonById(long personId) throws EntityNotFoundException {
+        Person person = personMap.get(personId);
+        if(null == person){
+            throw new EntityNotFoundException("No person found for personId=" + personId);
+        }
+        return person;
     }
 
     public Person updatePerson(Person updatedPerson){
