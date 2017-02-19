@@ -2,12 +2,14 @@ package com.abnormallydriven.daggerspark;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonObject;
 
 import com.abnormallydriven.daggerspark.people.PeopleRepository;
-import com.abnormallydriven.daggerspark.people.Person;
+import com.abnormallydriven.daggerspark.people.PeopleResource;
 
-import static spark.Spark.*;
+import static spark.Spark.delete;
+import static spark.Spark.get;
+import static spark.Spark.post;
+import static spark.Spark.put;
 
 
 public class Application {
@@ -17,40 +19,13 @@ public class Application {
         PeopleRepository peopleRepository = new PeopleRepository();
         GsonTransformer transformer = new GsonTransformer(gson);
 
+        PeopleResource peopleResource = new PeopleResource(peopleRepository, gson);
 
-        post("/people", "application/json", (request, response) -> {
-            JsonObject requestDto = gson.fromJson(request.body(), JsonObject.class);
-            return peopleRepository.createPerson(requestDto.get("firstName").getAsString(), requestDto.get("lastName").getAsString());
-        }, transformer);
-
-
-        get("/people/:id", "application/json", (request, response) -> {
-            Long personId = Long.valueOf(request.params(":id"));
-            return peopleRepository.getPersonById(personId);
-        }, transformer);
-
-        get("/people", "application/json", (request, response) -> {
-            return peopleRepository.getAllPeople();
-        }, transformer);
-
-
-        put("/people/:id", "application/json", (request, response) -> {
-            Long personId = Long.valueOf(request.params(":id"));
-
-            JsonObject requestDto = gson.fromJson(request.body(), JsonObject.class);
-            Person person = peopleRepository.getPersonById(personId);
-
-            person.setFirstName(requestDto.get("firstName").getAsString());
-            person.setLastName(requestDto.get("lastName").getAsString());
-
-            return peopleRepository.updatePerson(person);
-        }, transformer);
-
-
-        delete("/people/:id", "application/json", (request, response) -> {
-            Long personId = Long.valueOf(request.params(":id"));
-            return peopleRepository.deletePerson(personId);
-        }, transformer);
+        post("/people", "application/json", peopleResource::createPerson, transformer);
+        get("/people/:id", "application/json", peopleResource::getPerson, transformer);
+        get("/people", "application/json", peopleResource::getAllPeople, transformer);
+        put("/people/:id", "application/json", peopleResource::updatePerson, transformer);
+        delete("/people/:id", "application/json", peopleResource::deletePerson, transformer);
 
     }
 }
