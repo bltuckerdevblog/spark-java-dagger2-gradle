@@ -1,5 +1,8 @@
 package com.abnormallydriven.daggerspark;
 
+import com.abnormallydriven.daggerspark.dagger.ApplicationComponent;
+import com.abnormallydriven.daggerspark.dagger.DaggerApplicationComponent;
+
 public class Application {
 
     private ApplicationComponent applicationComponent;

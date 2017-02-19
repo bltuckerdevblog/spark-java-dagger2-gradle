@@ -1,4 +1,4 @@
-package com.abnormallydriven.daggerspark;
+package com.abnormallydriven.daggerspark.transformers;
 
 import com.google.gson.Gson;
 

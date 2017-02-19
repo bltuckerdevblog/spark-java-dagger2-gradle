@@ -1,4 +1,6 @@
-package com.abnormallydriven.daggerspark;
+package com.abnormallydriven.daggerspark.dagger;
+
+import com.abnormallydriven.daggerspark.ResourceRegistry;
 
 import javax.inject.Singleton;
 
