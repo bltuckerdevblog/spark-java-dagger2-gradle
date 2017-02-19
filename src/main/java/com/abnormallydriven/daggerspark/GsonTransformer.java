@@ -2,13 +2,18 @@ package com.abnormallydriven.daggerspark;
 
 import com.google.gson.Gson;
 
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
 import spark.ResponseTransformer;
 
+@Singleton
 public class GsonTransformer implements ResponseTransformer {
 
     private final Gson gson;
 
-    public GsonTransformer(Gson gson){
+    @Inject
+    GsonTransformer(Gson gson){
         this.gson = gson;
     }
 

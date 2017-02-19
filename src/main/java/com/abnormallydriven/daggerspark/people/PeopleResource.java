@@ -5,14 +5,19 @@ import com.google.gson.JsonObject;
 
 import java.util.List;
 
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
 import spark.Request;
 import spark.Response;
 
+@Singleton
 public class PeopleResource {
 
     private PeopleRepository peopleRepository;
     private Gson gson;
 
+    @Inject
     public PeopleResource(PeopleRepository peopleRepository, Gson gson){
         this.peopleRepository = peopleRepository;
         this.gson = gson;

@@ -18,6 +18,7 @@ version '1.0-SNAPSHOT'
 apply plugin: 'java'
 apply plugin: 'com.github.johnrengelman.shadow'
 apply plugin: "net.ltgt.apt"
+apply plugin: 'idea'
 
 sourceCompatibility = 1.8
 

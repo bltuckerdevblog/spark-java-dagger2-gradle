@@ -4,15 +4,19 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
+@Singleton
 public class PeopleRepository {
 
     private final AtomicInteger idSequence;
 
     private final Map<Long, Person> personMap;
 
+    @Inject
     public PeopleRepository(){
         idSequence = new AtomicInteger(0);
         personMap = new ConcurrentHashMap<>(10);
