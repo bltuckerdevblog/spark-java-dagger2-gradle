@@ -1,8 +1,11 @@
 package com.abnormallydriven.daggerspark;
 
+import static spark.Spark.*;
+
+
 public class Application {
 
     public static void main(String[] args) {
-        System.out.println("Hello World");
+        get("/hello", (req, res) -> "Hello World");
     }
 }
