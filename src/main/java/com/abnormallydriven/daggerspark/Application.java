@@ -5,7 +5,11 @@ import com.abnormallydriven.daggerspark.dagger.DaggerApplicationComponent;
 
 public class Application {
 
-    private ApplicationComponent applicationComponent;
+    private static ApplicationComponent applicationComponent;
+
+    public static ApplicationComponent getApplicationComponent(){
+        return applicationComponent;
+    }
 
     private void start(){
         //initialize dagger
@@ -13,6 +17,9 @@ public class Application {
 
         //register exception handlers
         registerExceptionHandlers();
+
+        //register our filters
+        registerFilters();
 
         //register routes
         registerRoutes();
@@ -24,6 +31,10 @@ public class Application {
 
     private void registerExceptionHandlers() {
         applicationComponent.exceptionHandlerRegistry().registerHandlers();
+    }
+
+    private void registerFilters() {
+        applicationComponent.filterRegistry().registerFilters();
     }
 
     private void registerRoutes(){

@@ -1,4 +1,4 @@
-package com.abnormallydriven.daggerspark.filters;
+package com.abnormallydriven.daggerspark.authorization;
 
 import com.google.gson.Gson;
 
